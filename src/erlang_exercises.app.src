@@ -1,0 +1,12 @@
+{application, erlang_exercises,
+ [
+  {description, "Exercises from Erlang Programming book"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { erlang_exercises_app, []}},
+  {env, []}
+ ]}.
