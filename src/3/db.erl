@@ -18,8 +18,7 @@ destroy(_) -> ok.
 % read/2
 read(_, []) -> false;
 read(Key, [{Key, Value} | _]) -> Value;
-read(Key, Db) ->
-  [_ | NewDb] = Db,
+read(Key, [_ | NewDb]) ->
   read(Key, NewDb).
 
 % write/3
@@ -28,19 +27,15 @@ write(Key, Value, Db) ->
 
 % match/2
 match(_, []) -> [];
-match(Value, [{Key, Value} | _] = Db) ->
-  [_ | NewDb] = Db,
+match(Value, [{Key, Value} | NewDb]) ->
   [Key | match(Value, NewDb)];
-match(Value, Db) ->
-  [_ | NewDb] = Db,
+match(Value, [_ | NewDb]) ->
   match(Value, NewDb).
 
 % delete/2
 delete(_, []) -> false;
-delete(Key, [{Key, _} | _] = Db) ->
-  [_ | NewDb] = Db,
+delete(Key, [{Key, _} | NewDb]) ->
   NewDb;
-delete(Key, Db) ->
-  [_ | NewDb] = Db,
+delete(Key, [_ | NewDb]) ->
   delete(Key, NewDb).
 
